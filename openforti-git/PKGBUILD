@@ -1,0 +1,54 @@
+# Maintainer: k1f0 <generic at k1f0.mozmail.com>
+# Contributor: Olliver Schinagl <oliver@schinagl.nl>
+
+pkgname='openforti-git'
+pkgdesc="An open implementation of Fortinet's proprietary PPP+SSL VPN solution"
+pkgver=r790.e4cb1d1
+pkgrel=1
+url='https://github.com/adrienverge/openfortivpn'
+arch=('x86_64')
+license=('GPL3')
+makedepends=(
+	'git'
+)
+depends=(
+	'glibc'
+	'openssl'
+	'ppp'
+	'resolvconf'
+	'systemd-libs'
+)
+provides=('openfortivpn')
+conflicts=(
+	'openfortivpn-git'
+	'openfortivpn'
+)
+backup=('etc/openfortivpn/config')
+source=("${pkgname}::git+${url}.git")
+md5sums=('SKIP')
+
+pkgver() {
+  cd "${srcdir}/${pkgname}"
+  printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+prepare() {
+	cd "${srcdir}/${pkgname}"
+	sed -i "s|^\(AC_INIT(\[openfortivpn\], \[\).*$|\1${pkgver}-g$(echo "${_commit}" | cut -c 1-9)])|" 'configure.ac'
+	autoreconf --force --install --verbose
+}
+
+build() {
+	cd "${srcdir}/${pkgname}"
+	./configure \
+	            --prefix='/usr' \
+	            --sysconfdir='/etc' \
+	            --enable-resolvconf \
+		    ;
+	make
+}
+
+package() {
+	cd "${srcdir}/${pkgname}"
+	make DESTDIR="${pkgdir}" install
+}
