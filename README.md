@@ -8,3 +8,4 @@ Personal collection of some modified Arch Packages
 - forticlient-vpn
 - caja
 - caja-extensions
+- eww-wayland-git
