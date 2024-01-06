@@ -2,7 +2,7 @@ pkgbase = eww-wayland-git
 	pkgdesc = ElKowar's wacky widgets
 	pkgver = r20.e81a907
 	pkgrel = 1
-	url = https://github.com/0xk1f0/eww-wayland
+	url = https://github.com/0xk1f0/eww
 	arch = x86_64
 	license = MIT
 	makedepends = cargo-nightly
@@ -11,7 +11,7 @@ pkgbase = eww-wayland-git
 	depends = gtk-layer-shell
 	provides = eww-wayland
 	conflicts = eww-wayland
-	source = git+https://github.com/0xk1f0/eww-wayland.git#branch=for-loop-fix
+	source = git+https://github.com/0xk1f0/eww.git#branch=for-loop-fix
 	b2sums = SKIP
 
 pkgname = eww-wayland-git

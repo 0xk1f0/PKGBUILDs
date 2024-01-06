@@ -2,8 +2,8 @@
 # Contributor: éclairevoyant
 # Contributor: Atif Chowdhury <iftakhar dot awal at gmail dot com>
 
-_pkgname=eww-wayland
-pkgname="$_pkgname-git"
+_pkgname=eww
+pkgname="${_pkgname}-wayland-git"
 pkgver=r20.e81a907
 pkgrel=1
 pkgdesc="ElKowar's wacky widgets"
@@ -12,8 +12,8 @@ url="https://github.com/0xk1f0/$_pkgname"
 license=(MIT)
 depends=(gtk3 gtk-layer-shell)
 makedepends=(cargo-nightly git)
-provides=("$_pkgname")
-conflicts=("$_pkgname")
+provides=("${_pkgname}-wayland")
+conflicts=("${_pkgname}-wayland")
 source=("git+$url.git#branch=for-loop-fix")
 b2sums=('SKIP')
 
