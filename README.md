@@ -9,3 +9,4 @@ Personal collection of some modified Arch Packages
 - caja
 - caja-extensions
 - eww-wayland-git
+- vesktop-bin

@@ -1,0 +1,21 @@
+pkgbase = openforti-git
+	pkgdesc = An open implementation of Fortinet's proprietary PPP+SSL VPN solution
+	pkgver = r790.e4cb1d1
+	pkgrel = 1
+	url = https://github.com/adrienverge/openfortivpn
+	arch = x86_64
+	license = GPL3
+	makedepends = git
+	depends = glibc
+	depends = openssl
+	depends = ppp
+	depends = resolvconf
+	depends = systemd-libs
+	provides = openfortivpn
+	conflicts = openfortivpn-git
+	conflicts = openfortivpn
+	backup = etc/openfortivpn/config
+	source = openforti-git::git+https://github.com/adrienverge/openfortivpn.git
+	md5sums = SKIP
+
+pkgname = openforti-git
