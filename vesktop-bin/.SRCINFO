@@ -15,6 +15,6 @@ pkgbase = vesktop-bin
 	source_aarch64 = vesktop-1.5.0-aarch64.deb::https://github.com/Vencord/Vesktop/releases/download/v1.5.0/vesktop_1.5.0_arm64.deb
 	sha256sums_aarch64 = 3250774bb3d2b5a11045c4814f572e9ca58efc975b25aa84559736452d4b5a78
 	source_x86_64 = vesktop-1.5.0-x86_64.deb::https://github.com/Vencord/Vesktop/releases/download/v1.5.0/vesktop_1.5.0_amd64.deb
-	sha256sums_x86_64 = b08f769ee19d32e27301ace10f0034594e364a1cf5bad4260d401d1eea3accaa
+	sha256sums_x86_64 = e64d144156fdbfc2525158dfaeaa8b0a0dd84e2c55eeab0456fc47514fab9932
 
 pkgname = vesktop-bin
