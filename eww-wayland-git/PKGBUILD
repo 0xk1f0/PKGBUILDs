@@ -5,16 +5,16 @@
 _pkgname=eww
 pkgname="${_pkgname}-wayland-git"
 pkgver=r20.e81a907
-pkgrel=2
+pkgrel=3
 pkgdesc="ElKowar's wacky widgets"
 arch=(x86_64)
-url="https://github.com/0xk1f0/$_pkgname"
+url="https://github.com/elkowar/$_pkgname"
 license=(MIT)
 depends=(gtk3 gtk-layer-shell)
 makedepends=(cargo-nightly git)
 provides=("${_pkgname}-wayland")
 conflicts=("${_pkgname}-wayland")
-source=("git+$url.git#branch=for-loop-fix")
+source=("git+$url.git")
 b2sums=('SKIP')
 
 prepare() {
