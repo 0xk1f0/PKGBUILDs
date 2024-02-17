@@ -5,7 +5,7 @@
 _pkgname=eww
 pkgname="${_pkgname}-wayland-git"
 pkgver=r20.e81a907
-pkgrel=1
+pkgrel=2
 pkgdesc="ElKowar's wacky widgets"
 arch=(x86_64)
 url="https://github.com/0xk1f0/$_pkgname"
@@ -19,8 +19,6 @@ b2sums=('SKIP')
 
 prepare() {
 	cd $_pkgname
-	export RUSTUP_TOOLCHAIN=nightly
-	cargo update
 	cargo fetch --locked --target "$CARCH-unknown-linux-gnu"
 }
 
@@ -30,7 +28,7 @@ pkgver() {
 
 build() {
 	cd $_pkgname
-	export RUSTUP_TOOLCHAIN=nightly
+	export RUSTUP_TOOLCHAIN=stable
 	export CARGO_TARGET_DIR=target
 	cargo build --frozen --release --no-default-features --features=wayland
 }
