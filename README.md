@@ -10,3 +10,4 @@ Personal collection of some modified Arch Packages
 - caja-extensions
 - eww-wayland-git
 - vesktop-bin
+- rofi-calc-git
