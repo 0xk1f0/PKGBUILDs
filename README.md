@@ -11,3 +11,4 @@ Personal collection of some modified Arch Packages
 - eww-wayland-git
 - vesktop-bin
 - rofi-calc-git
+- cinny-desktop

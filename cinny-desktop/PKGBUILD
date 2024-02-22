@@ -1,0 +1,52 @@
+# Maintainer: k1f0 <archlinux at k1f0.mozmail.com>
+# Contributor: Jef Roosens
+
+pkgname='cinny-desktop'
+pkgver='3.2.1'
+pkgrel=2
+pkgdesc='Matrix client focusing primarily on a simple, elegant and secure interface.'
+arch=('x86_64')
+url='https://cinny.in/'
+license=('MIT')
+depends=(
+    'webkit2gtk'
+    'openssl'
+    'gtk3'
+    'appmenu-gtk-module'
+    'libappindicator-gtk3'
+    'librsvg'
+    'libvips'
+    'sqlite'
+    'gst-plugins-good'
+)
+makedepends=('cargo' 'nodejs' 'npm')
+source=("${pkgname}-${pkgver}.zip::https://github.com/cinnyapp/cinny-desktop/releases/download/v${pkgver}/cinny-desktop-v${pkgver}.zip"
+        rust-clipboard-fix.patch
+        npm-clipboard-fix.patch)
+sha512sums=('d46e20e07d35cf2e9477325e3fd3c80e5b43024ff827624d88a577c7f0f507ab1cce147959ce69b4a8f2a781b10234b493c5019bb9b0b50091f4320ca53f5c0d'
+            '710e4a6ef5bcf94ce737a1833eb981e65a73c10706993da746c209f07e5ea90095ad3367a2f00d979f3188a27602dbbc5aed489084315ca2a1b4db7c0e8472b0'
+            'dd2b974e6a583a24f6a5248ac3aacf7d9b49dbd2abf2ae7de6de07d84138c99a65183cfc6a82765c1f04214b685beefa69c96ceb4cbd5fc649f79ea756d4bbb9')
+install="${pkgname}.install"
+
+build() {
+    cd "${pkgname}"
+
+    msg2 'Applying Clipboard Patches...'
+    patch -Np1 < ../rust-clipboard-fix.patch
+    cd cinny/ && patch -Np1 < ../../npm-clipboard-fix.patch
+    cd ..
+
+    msg2 'Installing Node dependencies...'
+    cd cinny/ && npm ci
+    cd .. && npm ci
+
+    msg2 'Running Tauri build...'
+    # With the default memory limit, the build fails due to having insufficient
+    # memory available. 4GB seems to be enough for now.
+    NODE_OPTIONS=--max_old_space_size=4096 npm run tauri build -- --bundles 'deb'
+}
+
+package() {
+    ar x "${pkgname}/src-tauri/target/release/bundle/deb/cinny_${pkgver}_amd64.deb" 'data.tar.gz'
+    tar xzf 'data.tar.gz' -C "${pkgdir}"
+}
