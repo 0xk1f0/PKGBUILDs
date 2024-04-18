@@ -12,3 +12,4 @@ Personal collection of some modified Arch Packages
 - vesktop-bin
 - rofi-calc-git
 - cinny-desktop
+- wpaperd
