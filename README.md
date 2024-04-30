@@ -13,3 +13,4 @@ Personal collection of some modified Arch Packages
 - rofi-calc-git
 - cinny-desktop
 - wpaperd
+- arrpc
