@@ -13,3 +13,4 @@ Personal collection of some modified Arch Packages
 - cinny-desktop
 - wpaperd
 - arrpc
+- deno-bin
