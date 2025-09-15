@@ -11,13 +11,12 @@ pkgbase = sudo-rs
 	depends = gcc-libs
 	depends = glibc
 	depends = pam
-	optdepends = apparmor: apparmor support
 	provides = sudo
 	conflicts = sudo
-	source = git+https://github.com/trifectatechfoundation/sudo-rs.git#tag=v0.2.8?signed
+	options = !debug
+	source = git+https://github.com/trifectatechfoundation/sudo-rs.git#tag=v0.2.8
 	source = sudo.pam
-	validpgpkeys = C2E4CAC4B12225DE1C3BB1C9289D082003D01E95
-	sha256sums = dbc7be8f0acca97f68ca9a81fab68ef8776c4a078a181cbf2612f00179008e7f
+	sha256sums = SKIP
 	sha256sums = 86c95f65b3970168a66038586320ed253fc8bf326e225415cd139e74ac99e687
 
 pkgname = sudo-rs

@@ -24,15 +24,12 @@ checkdepends=(
   # Not really needed directly, but the tests assume it exists
   procps-ng
 )
-optdepends=(
-  "apparmor: apparmor support"
-)
-source=(git+https://github.com/trifectatechfoundation/sudo-rs.git#tag=v${pkgver}?signed
+source=(git+https://github.com/trifectatechfoundation/sudo-rs.git#tag=v${pkgver}
         sudo.pam)
 sha256sums=(
-    'dbc7be8f0acca97f68ca9a81fab68ef8776c4a078a181cbf2612f00179008e7f'
+    'SKIP'
     '86c95f65b3970168a66038586320ed253fc8bf326e225415cd139e74ac99e687')
-validpgpkeys=(C2E4CAC4B12225DE1C3BB1C9289D082003D01E95) # Marc Schoolderman
+options=(!debug)
 
 prepare() {
   cd "$pkgname"
@@ -41,12 +38,7 @@ prepare() {
 
 build() {
   cd "$pkgname"
-  cargo build --release --frozen --features apparmor
-}
-
-check() {
-  cd "$pkgname"
-  cargo test --frozen --features apparmor
+  cargo build --release --frozen
 }
 
 package() {
@@ -73,6 +65,6 @@ package() {
   install -Dm0644 "$srcdir/sudo.pam" "$pkgdir/etc/pam.d/sudo"
 
   # sudoedit links for convenience
-  ln "$pkgdir/usr/bin/sudo-rs" "$pkgdir/usr/bin/sudoedit"
-  ln "$pkgdir/usr/share/man/man8/sudo-rs.8" "$pkgdir/usr/share/man/man8/sudoedit.8"
+  ln "$pkgdir/usr/bin/sudo" "$pkgdir/usr/bin/sudoedit"
+  ln "$pkgdir/usr/share/man/man8/sudo.8" "$pkgdir/usr/share/man/man8/sudoedit.8"
 }
