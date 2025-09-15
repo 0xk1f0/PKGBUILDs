@@ -4,9 +4,6 @@ Personal collection of some modified Arch Packages
 
 # List
 
-- openfortivpn
-- forticlient-vpn
-- rofi-calc-git
-- wpaperd
+- openforti-git
 - arrpc-git
-- deno-bin
+- sudo-rs

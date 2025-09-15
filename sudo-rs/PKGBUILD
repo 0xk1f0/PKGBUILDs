@@ -1,0 +1,78 @@
+# Maintainer: k1f0 <generic at k1f0.mozmail.com>
+# Contributor: Bert Peters <bertptrs@archlinux.org>
+# Contributor: T.J. Townsend <blakkheim@archlinux.org>
+
+pkgname=sudo-rs
+pkgver=0.2.8
+pkgrel=3
+pkgdesc="A memory-safe implementation of sudo and su"
+arch=('x86_64')
+url="https://github.com/trifectatechfoundation/sudo-rs"
+license=('Apache-2.0 AND MIT')
+provides=("${pkgname%-rs}")
+conflicts=("${pkgname%-rs}")
+depends=(
+  gcc-libs
+  glibc
+  pam
+)
+makedepends=(
+  cargo
+  git
+)
+checkdepends=(
+  # Not really needed directly, but the tests assume it exists
+  procps-ng
+)
+optdepends=(
+  "apparmor: apparmor support"
+)
+source=(git+https://github.com/trifectatechfoundation/sudo-rs.git#tag=v${pkgver}?signed
+        sudo.pam)
+sha256sums=(
+    'dbc7be8f0acca97f68ca9a81fab68ef8776c4a078a181cbf2612f00179008e7f'
+    '86c95f65b3970168a66038586320ed253fc8bf326e225415cd139e74ac99e687')
+validpgpkeys=(C2E4CAC4B12225DE1C3BB1C9289D082003D01E95) # Marc Schoolderman
+
+prepare() {
+  cd "$pkgname"
+  cargo fetch --locked --target "$(rustc -vV | sed -n 's/host: //p')"
+}
+
+build() {
+  cd "$pkgname"
+  cargo build --release --frozen --features apparmor
+}
+
+check() {
+  cd "$pkgname"
+  cargo test --frozen --features apparmor
+}
+
+package() {
+  local section
+
+  cd "$pkgname"
+
+  # binaries
+  install -Dm4755 target/release/sudo "$pkgdir/usr/bin/sudo"
+  install -Dm4755 target/release/su "$pkgdir/usr/bin/su-rs"
+  install -Dm0755 target/release/visudo "$pkgdir/usr/bin/visudo"
+
+  # licenses
+  install -Dm644 -t "$pkgdir/usr/share/licenses/$pkgname" LICENSE-*
+  install -Dm644 -t "$pkgdir/usr/share/doc/$pkgname" CHANGELOG.md README.md SECURITY.md
+
+  # man pages
+  install -Dm0644 docs/man/su.1.man "$pkgdir/usr/share/man/man1/su-rs.1"
+  install -Dm0644 docs/man/sudo.8.man "$pkgdir/usr/share/man/man8/sudo.8"
+  install -Dm0644 docs/man/sudoers.5.man "$pkgdir/usr/share/man/man5/sudoers.5"
+  install -Dm0644 docs/man/visudo.8.man "$pkgdir/usr/share/man/man8/visudo.8"
+
+  # PAM file
+  install -Dm0644 "$srcdir/sudo.pam" "$pkgdir/etc/pam.d/sudo"
+
+  # sudoedit links for convenience
+  ln "$pkgdir/usr/bin/sudo-rs" "$pkgdir/usr/bin/sudoedit"
+  ln "$pkgdir/usr/share/man/man8/sudo-rs.8" "$pkgdir/usr/share/man/man8/sudoedit.8"
+}
