@@ -3,7 +3,7 @@
 # Contributor: T.J. Townsend <blakkheim@archlinux.org>
 
 pkgname=sudo-rs
-pkgver=0.2.11
+pkgver=0.2.12
 pkgrel=1
 pkgdesc="A memory-safe implementation of sudo and su"
 arch=('x86_64')

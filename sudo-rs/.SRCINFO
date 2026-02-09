@@ -1,6 +1,6 @@
 pkgbase = sudo-rs
 	pkgdesc = A memory-safe implementation of sudo and su
-	pkgver = 0.2.11
+	pkgver = 0.2.12
 	pkgrel = 1
 	url = https://github.com/trifectatechfoundation/sudo-rs
 	arch = x86_64
@@ -14,7 +14,7 @@ pkgbase = sudo-rs
 	provides = sudo
 	conflicts = sudo
 	options = !debug
-	source = git+https://github.com/trifectatechfoundation/sudo-rs.git#tag=v0.2.11
+	source = git+https://github.com/trifectatechfoundation/sudo-rs.git#tag=v0.2.12
 	source = sudo.pam
 	sha256sums = SKIP
 	sha256sums = 86c95f65b3970168a66038586320ed253fc8bf326e225415cd139e74ac99e687
